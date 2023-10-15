@@ -12,6 +12,28 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\domainName.js"
-        }
+        },
+        {
+			"type": "node",
+			"name": "Launch Node via Docker",
+			"request": "launch",
+			"attachSimplePort": 9229,
+			"runtimeExecutable": "docker",
+			"runtimeArgs": [
+				"run"
+				, "--rm"
+                , "--name"
+                , "node-debug-vscode"
+				, "-p"
+				, "9229:9229"
+				, "-v"
+				, "${workspaceFolder}:${workspaceFolder}"
+				, "-w"
+				, "${workspaceFolder}"
+				, "node"
+				, "--inspect-brk=0.0.0.0:9229"
+				, "${relativeFile}"
+			]
+        }  
     ]
 }
